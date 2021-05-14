@@ -22,6 +22,21 @@
       <hr>
       <h5>설명</h5>
       <p><%=@pack.desc %></p>
+      <hr>
+
+      <h3>필수 옵션 선택</h3>
+      <form action="/carts" method="post">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <input type="hidden" name="pack_id" value="<%=@pack.id %>">
+        
+        <div class="form-group">
+          <label for="quantity">수량</label>
+          <input type="number" name="quantity" value="1" class="form-control" id="quantity" min="1" max="10">
+        </div>
+
+        <button type="submit" class="btn btn-outline-dark">장바구니 등록</button>
+
+      </form>
     </div>
   </div>
 </div>
