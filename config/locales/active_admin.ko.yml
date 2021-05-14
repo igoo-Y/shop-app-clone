@@ -71,9 +71,11 @@ ko:
         one: "성공적으로 1개 %{model}을/를 삭제하였습니다"
         other: "성공적으로 %{count}개의 %{plural_model}을/를 삭제하였습니다"
       selection_toggle_explanation: "(선택 항목 바꾸기)"
-      action_label: "선택한 항목 %{title}"
+      action_label: "%{title}"
       labels:
         destroy: "삭제"
+        publish: "공개처리"
+        unpublish: "비공개처리"
     comments:
       created_at: "작성시간"
       resource_type: "첨부파일 형태"

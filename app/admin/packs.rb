@@ -15,6 +15,34 @@ ActiveAdmin.register Pack do
   #   permitted
   # end
 
+  #scope
+  scope :all
+  scope -> {"공개"}, :published, default: true
+  scope -> {"비공개"}, :unpublished
+
+  #batch
+  batch_action :publish do |ids|
+    @packs = Pack.where(id: ids)
+
+    @packs.each do |pack|
+      pack.update(is_publish: true)
+    end
+
+    flash[:notice] = "마스크 팩이 공개처리되었습니다."
+    redirect_back(fallback_location: root_path)
+  end
+
+  batch_action :unpublish do |ids|
+    @packs = Pack.where(id: ids)
+
+    @packs.each do |pack|
+      pack.update(is_publish: false)
+    end
+
+    flash[:notice] = "마스크 팩이 비공개처리되었습니다." #이때 notice 를 error 로 바꾸면 빨간색으로 나옴.
+    redirect_back(fallback_location: root_path)
+  end
+
   #index 커스텀
   index do
     selectable_column
@@ -31,7 +59,10 @@ ActiveAdmin.register Pack do
 
     column :product_name
     column :company_name
-    column :desc
+    column :price do |pack|
+      number_to_currency(pack.price)
+    end
+    column :is_publish
 
     actions
   end
@@ -43,6 +74,8 @@ ActiveAdmin.register Pack do
       f.input :product_name
       f.input :company_name
       f.input :desc
+      f.input :price, hint: '실제 판매 가격을 입력해주세요.'
+      f.input :is_publish
     end
     f.actions
   end
@@ -60,7 +93,10 @@ ActiveAdmin.register Pack do
       end
       row :product_name
       row :company_name
-      row :desc
+      row :price do |pack|
+        number_to_currency(pack.price)
+      end
+      row :is_publish
     end
   end
 
