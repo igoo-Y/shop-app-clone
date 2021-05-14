@@ -28,6 +28,8 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # 일련의 동작을 active_job 에 넣어서 처리하는데 이때 정상적으로 동작(active_storage)하도록 하기 위함.
+  config.active_job.queue_adapter = :inline
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 

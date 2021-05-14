@@ -9,13 +9,19 @@
 
   <div class="row mt-4">
     <div class="col-6">
-      <img src="<%=url_for(@pack.image)%>" alt="" class="img-fluid">
+      <% if @pack.image.attached? %>
+        <img src="<%=url_for(@pack.image)%>" alt="" class="img-fluid">
+      <% else %>
+        <img src="https://via.placeholder.com/640x360?text=No+Image" alt="">
+      <% end %>
     </div>
     <div class="col-6">
       <p><%=@pack.product_name %></p>
       <hr>
-      <p><%=@pack.desc %></p>
       <p><%=@pack.company_name %></p>
+      <hr>
+      <h5>설명</h5>
+      <p><%=@pack.desc %></p>
     </div>
   </div>
 </div>
