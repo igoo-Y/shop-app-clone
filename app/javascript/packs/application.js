@@ -18,3 +18,7 @@ require("channels")
 //= stub active_admin
 
 import "controllers"
+
+//= require jquery
+//= require popper
+//= require bootstrap
