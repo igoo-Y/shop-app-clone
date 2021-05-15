@@ -6,12 +6,16 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="#">브랜드</a>
-        <a class="nav-link" href="/packs">쇼핑</a>
-        <a class="nav-link" href="#">추천</a>
-        <a class="nav-link" href="#">공지</a>
+        <a class="nav-item nav-link" href="#">브랜드</a>
+        <a class="nav-item nav-link" href="/packs">쇼핑</a>
+        <a class="nav-item nav-link" href="#">추천</a>
+        <a class="nav-item nav-link" href="#">공지</a>
 
         <% if user_signed_in? %>
+          <a class="nav-item nav-link" href="/carts">
+            <i class="fas fa-cart-arrow-down"></i>
+          </a>
+
           <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               <%= current_user.email %>

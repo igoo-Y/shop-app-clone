@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :packs, only: [:index, :show]
 
-  resources :carts, only: [:create]
+  resources :carts, only: [:index, :create]
 
   # get 'packs/index'
   # get 'packs/show/:id' => "packs#show"
