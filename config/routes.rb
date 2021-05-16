@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'orders/create'
-  get 'orders/show'
-  get 'carts/create'
   devise_for :users
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -12,7 +9,9 @@ Rails.application.routes.draw do
 
   resources :carts, only: [:index, :create, :destroy]
 
-  resources :orders, only: [:create, :show, :index]
+  resources :orders, only: [:create, :show, :index] do
+    resources :payments, only: [:create]
+  end
 
   get "mypage" => "home#mypage"
 
