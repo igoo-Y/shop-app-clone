@@ -12,6 +12,8 @@ class CartsController < ApplicationController
       quantity: params[:quantity]
     )
 
+    flash[:notice] = "장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?"
+
     redirect_back(fallback_location: root_path)
   end
 end

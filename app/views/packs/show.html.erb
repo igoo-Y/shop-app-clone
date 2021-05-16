@@ -39,7 +39,7 @@
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <input type="number" name="quantity" value="1" class="form-control" id="quantity" min="1" max="10">
+<!--          <input type="number" name="quantity" value="1" class="form-control" id="quantity" min="1" max="10">-->
         </div>
 
         <button type="submit" class="btn btn-outline-dark">장바구니 등록</button>
@@ -48,3 +48,13 @@
     </div>
   </div>
 </div>
+
+<script>
+  <% if flash[:notice].present? %>
+    result = confirm("<%=flash[:notice] %>")
+
+    if(result){
+        location.href = "/carts"
+    }
+  <%end %>
+</script>
