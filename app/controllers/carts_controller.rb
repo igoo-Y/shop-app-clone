@@ -3,6 +3,20 @@ class CartsController < ApplicationController
 
   def index
     @carts = current_user.carts
+
+    @product_price = 0
+    @carts.each do |cart|
+      # @product_price = @product_price + cart.quantity * cart.pack.price
+      @product_price += cart.quantity * cart.pack.price
+    end
+
+    if @product_price > 15000
+      @shipping_fee = 0
+    else
+      @shipping_fee = 2500
+    end
+
+    @total_price = @product_price + @shipping_fee
   end
 
   def create

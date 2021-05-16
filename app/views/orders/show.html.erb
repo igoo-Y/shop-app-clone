@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-4 ">
+      <h3>주문 정보 확인</h3>
+
+      <% @order.order_items.each do |item| %>
+        <div class="card mt-3">
+          <div class="card-body">
+            <h5 class="card-title"><%=item.pack.product_name %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%=item.pack.company_name %></h6>
+            <p class="card-text">수량: <%=item.quantity %></p>
+            <a href="#" class="card-link">수정</a>
+            <a href="#" class="card-link">삭제</a>
+            <p class="card-text">가격: <%= number_to_currency(item.quantity * item.pack.price) %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

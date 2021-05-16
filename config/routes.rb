@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'orders/create'
+  get 'orders/show'
   get 'carts/create'
   devise_for :users
 
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
   resources :packs, only: [:index, :show]
 
   resources :carts, only: [:index, :create, :destroy]
+
+  resources :orders, only: [:create, :show]
 
   # get 'packs/index'
   # get 'packs/show/:id' => "packs#show"
