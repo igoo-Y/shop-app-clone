@@ -11,6 +11,8 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'pry-rails'
 gem 'font-awesome-sass', '~> 5.15.1'
 gem 'any_login'
+gem 'httparty'
+gem 'iamport'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
