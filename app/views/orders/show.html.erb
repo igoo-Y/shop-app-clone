@@ -46,6 +46,37 @@
 
     </div>
   </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <h3>결제 정보</h3>
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">주문금액 합계</h5>
+            <p class="card-text"><%= number_to_currency(@order.product_price) %></p>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <h5 class="card-title">배송비</h5>
+            <p class="font-weight-bold">*15,000원 이상 주문 시 무료배송</p>
+            <p class="card-text"><%= number_to_currency(@order.shipping_fee) %></p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-between mt-3">
+            <h5 class="card-title">최종 결제 금액</h5>
+            <p class="card-text"><%= number_to_currency(@order.total_price) %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <a href="#" class="btn btn-warning w-100 my-5 shadow">결제하기</a>
+    </div>
+  </div>
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
