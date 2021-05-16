@@ -21,7 +21,7 @@
               <%= current_user.email %>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">마이페이지</a></li>
+              <li><a class="dropdown-item" href="/mypage">마이페이지</a></li>
               <li><%= link_to '로그아웃', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
             </ul>
           </div>

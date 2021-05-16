@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   resources :carts, only: [:index, :create, :destroy]
 
-  resources :orders, only: [:create, :show]
+  resources :orders, only: [:create, :show, :index]
+
+  get "mypage" => "home#mypage"
 
   # get 'packs/index'
   # get 'packs/show/:id' => "packs#show"
