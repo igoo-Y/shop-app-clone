@@ -17,4 +17,51 @@
       <% end %>
     </div>
   </div>
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <h3>배송정보 입력</h3>
+      <form action="">
+        <div class="mb-3">
+          <label for="" class="">받는 분 성함</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">연락처</label>
+          <input type="text" class="form-control" id="phone">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">이메일</label>
+          <input type="text" class="form-control" id="email">
+        </div>
+
+        <div class="mb-3">
+          <label for="" class="d-block">주소</label>
+          <a href="" class="btn btn-outline-dark mb-4" id="search_address_button">주소검색</a>
+          <input type="text" class="form-control mt-3" id="post_code" name="post_code" placeholder="우편번호">
+          <input type="text" class="form-control mt-3" id="address_1" name="address_1" placeholder="도로명주소">
+          <input type="text" class="form-control mt-3" id="address_2" name="address_2" placeholder="상세주소">
+        </div>
+      </form>
+
+    </div>
+  </div>
 </div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+  $("search_address_button").on("click", function (e){
+      e.preventDefault();
+  })
+
+  function postCodePopUp(){
+      new daum.Postcode({
+          oncomplete: function(data) {
+              $("#post_code").val(data.zonecode)
+              $("#address_1").val(data.roadAddress)
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+              // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+          }
+      }).open();
+  }
+</script>
