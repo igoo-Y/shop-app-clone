@@ -74,25 +74,62 @@
 
   <div class="row">
     <div class="col-12">
-      <a href="#" class="btn btn-warning w-100 my-5 shadow">결제하기</a>
+      <a href="#" class="btn btn-warning w-100 my-5 shadow" id="payment_btn">결제하기</a>
     </div>
   </div>
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-  $("search_address_button").on("click", function (e){
-      e.preventDefault();
-  })
+    $(function(){
+        var IMP = window.IMP; // 생략가능
+        IMP.init('imp78655559'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
-  function postCodePopUp(){
-      new daum.Postcode({
-          oncomplete: function(data) {
-              $("#post_code").val(data.zonecode)
-              $("#address_1").val(data.roadAddress)
-              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-              // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-          }
-      }).open();
-  }
+        function request_pay(){
+            IMP.request_pay({
+                pg : 'inicis', // version 1.1.0부터 지원.
+                pay_method : 'card',
+                merchant_uid : 'merchant_' + new Date().getTime(),
+                name : '주문명:결제테스트',
+                amount : 14000,
+                buyer_email : 'iamport@siot.do',
+                buyer_name : '구매자이름',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456',
+                m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+            }, function(rsp) {
+                if ( rsp.success ) {
+                    var msg = '결제가 완료되었습니다.';
+                    msg += '고유ID : ' + rsp.imp_uid;
+                    msg += '상점 거래ID : ' + rsp.merchant_uid;
+                    msg += '결제 금액 : ' + rsp.paid_amount;
+                    msg += '카드 승인번호 : ' + rsp.apply_num;
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                }
+                alert(msg);
+            });
+        }
+
+        $("#payment_btn").on("click", function (e){
+            e.preventDefault();
+            request_pay();
+        })
+
+        function postCodePopup(){
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    $("#post_code").val(data.zonecode)
+                    $("#address_1").val(data.roadAddress)
+                }
+            }).open();
+        }
+
+        $("#search_address_btn").on("click", function(e){
+            e.preventDefault();
+            postCodePopup();
+        })
+    })
 </script>
