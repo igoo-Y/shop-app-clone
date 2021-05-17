@@ -107,9 +107,13 @@
                 m_redirect_url : 'https://www.yourdomain.com/payments/complete'
             }, function(rsp) {
                 if ( rsp.success ) {
+                    var msg = '결제가 완료되었습니다.';
                     $("#imp_uid").val(rsp.imp_uid)
                     $("#merchant_uid").val(rsp.merchant_uid)
+                    $("#paid_amount").val(rsp.paid_amount)
+                    $("#apply_num").val(rsp.apply_num)
                 } else {
+                    var msg = '결제에 실패하였습니다.';
                     $("#error_msg").val(rsp.error_msg)
                 }
                 // alert(msg);

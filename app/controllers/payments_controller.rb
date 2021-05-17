@@ -25,7 +25,10 @@ class PaymentsController < ApplicationController
 
       flash[:notice] = error_msg
 
-      redirect_to "/orders"
+      # redirect_to "/orders"
+      respond_to do |format|
+        format.js
+      end
     end
   end
 end
