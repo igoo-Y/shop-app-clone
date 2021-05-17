@@ -107,18 +107,9 @@
                 m_redirect_url : 'https://www.yourdomain.com/payments/complete'
             }, function(rsp) {
                 if ( rsp.success ) {
-                    var msg = '결제가 완료되었습니다.';
-                    // msg += '고유ID : ' + rsp.imp_uid;
-                    // msg += '상점 거래ID : ' + rsp.merchant_uid;
-                    // msg += '결제 금액 : ' + rsp.paid_amount;
-                    // msg += '카드 승인번호 : ' + rsp.apply_num;
                     $("#imp_uid").val(rsp.imp_uid)
                     $("#merchant_uid").val(rsp.merchant_uid)
-                    $("#paid_amount").val(rsp.paid_amount)
-                    $("#apply_num").val(rsp.apply_num)
                 } else {
-                    var msg = '결제에 실패하였습니다.';
-                    // msg += '에러내용 : ' + rsp.error_msg;
                     $("#error_msg").val(rsp.error_msg)
                 }
                 // alert(msg);
@@ -126,9 +117,50 @@
             });
         }
 
+        function check_form(){
+            is_name = $("#name").val() == ""
+            is_phone = $("#phone").val() == ""
+            is_email = $("#email").val() == ""
+            is_post_code = $("#post_code").val() == ""
+            is_address_1 = $("#address_1").val() == ""
+            is_address_2 = $("#address_2").val() == ""
+
+            msg = ""
+            if(is_name){
+                msg += "이름을 입력해주세요.\n"
+            }
+
+            if(is_phone){
+                msg += "연락처를 입력해주세요.\n"
+            }
+
+            if(is_email){
+                msg += "이메일을 입력해주세요.\n"
+            }
+
+            if(is_post_code || is_address_1){
+                msg += "주소를 검색해주세요.\n"
+            }
+
+            if(is_address_2){
+                msg += "상세 주소를 입력해주세요.\n"
+            }
+
+            return {
+                status: msg == "",
+                msg: msg
+            }
+        }
+
         $("#payment_btn").on("click", function (e){
             e.preventDefault();
-            request_pay();
+            checked_data = check_form()
+
+            if (checked_data.status) {
+              request_pay();
+            } else {
+                alert(checked_data.msg)
+            }
         })
 
         function postCodePopup(){
