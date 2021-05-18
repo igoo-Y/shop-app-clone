@@ -1,16 +1,21 @@
 ActiveAdmin.register Order do
-
+  # 스코프
   scope :all
   scope -> {"결제 전"}, :before_payment
   scope -> {"배송 중"}, :processed
   scope -> {"배송 완료"}, :completed
   scope -> {"결제 취소"}, :failed
 
+  # 필터(검색기능)
   filter :name
   filter :phone
   filter :post_code
   filter :address
   filter :email
+
+  # 다른 모델의 데이터 검색하기 cont(포함), eq(일치)
+  filter :user_email_cont, label: "사용자 이메일로 검색"
+  filter :packs_product_name_cont, label: "팩의 이름으로 검색"
 
   # Index
   index do
